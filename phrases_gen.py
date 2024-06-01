@@ -14,6 +14,7 @@ class PhraseGenerator:
         self.meendAV = self.freemeend_AV()
         self.ALM_all = self.ALM()
         self.phrases_all = self.all_phrases()
+        self.extended()
         self.GrahaPhrases = []
         self.NyasaPhrases = []
         self.SamaPhrases = []
@@ -26,6 +27,7 @@ class PhraseGenerator:
         self.EmotivePhrases = []
         self.BhavaPhrases = []
         self.sort()
+
 
 
 
@@ -134,12 +136,13 @@ class PhraseGenerator:
         for phrase in self.phrases_all:
             if phrase[0] in self.raga.graha:
                 self.GrahaPhrases.append(phrase)
-            if phrase[0] in self.raga.nyasa:
+            if phrase[-1] in self.raga.nyasa or phrase[-1]=="-" and phrase[-2] in self.raga.nyasa:
                 self.NyasaPhrases.append(phrase)
             if phrase[0] in self.raga.sama:
                 self.SamaPhrases.append(phrase)
-            if phrase[0] in self.raga.amsa:
-                self.AmsaPhrases.append(phrase)
+            for i in phrase:
+                if i in self.raga.amsa and phrase not in self.AmsaPhrases:
+                    self.AmsaPhrases.append(phrase)
             if self.raga.vadi in phrase:
                 self.VadiPhrases.append(phrase)
                 # print(phrase)
@@ -163,18 +166,32 @@ class PhraseGenerator:
                 self.BhavaPhrases.append(i)
             if i not in self.SarvaPhrases:
                 self.SarvaPhrases.append(i)
+    
+    def extended(self):
+        elongated = []
+        for phrase in self.phrases_all:
+            phrase_new = []
+            for i in phrase:
         
-            
+                if i in self.raga.nyasa or i == self.raga.vadi:
+                    phrase_new.append(i)
+                    phrase_new.append("-")
+                else:
+                    phrase_new.append(i)
+            if phrase_new not in elongated:
+                elongated.append(phrase_new)
+        for phrase in elongated:
+            if phrase not in self.phrases_all:
+                self.phrases_all.append(phrase)
             
         
 
     
 # Usage example
-# raga = Raga(vadi="sa", mode="auto", varjyaAaroha=[], varjyaAvaroha=[])  # for testing purposes only
-# lml = LML()  # for testing purposes only
-# phrase_generator = PhraseGenerator(raga)
-# phrases_all = phrase_generator.phrases_all
-# print(len(phrases_all))
+raga = Raga(vadi="sa", mode="auto", varjyaAaroha=[], varjyaAvaroha=[])  # for testing purposes only
+lml = LML()  # for testing purposes only
+phrase_generator = PhraseGenerator(raga)
+phrases_all = phrase_generator.phrases_all
+print(len(phrases_all))
 # for phrase in phrases_all:
 #     print(phrase)
-#

@@ -1,3 +1,7 @@
-rag = Raga("ga", mode="auto", varjyaAaroha=["ni"], varjyaAvaroha=["ni"])
-# bandish = Bandish(raga=rag, matras=8)
-# track = bandish.construct_bandish()
+raga = Raga(vadi="sa", mode="auto", varjyaAaroha=[], varjyaAvaroha=[])  # for testing purposes only
+lml = LML()  # for testing purposes only
+phrase_generator = PhraseGenerator(raga)
+phrases_all = phrase_generator.phrases_all
+print(len(phrases_all))
+for phrase in phrases_all:
+    print(phrase)

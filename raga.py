@@ -229,8 +229,10 @@ class Raga:
         self.sama = input().split(" ")
         print("Enter a string of amsa swaras seperated by " "." )
         self.amsa = input().split(" ")
-        print("Enter a string of emotive swaras seperated by " "." )
-        self.emotive = input().split(" ")
+        Emotive = ["kre","kdha","kni","kga","mat"]
+        for i in Emotive:
+            if i in self.swars:
+                self.emotive.append(i)
 
 
     def _set_imp_swaras(self):
@@ -243,15 +245,15 @@ class Raga:
         for i in nyasa:
             if i in self.swars and i not in self.nyasa and i!=None:
                 self.nyasa.append(i)
-        sama = ["sa","ga","ma"]
+        sama = ["sa","ga","ma","pa", self.vadi, self.psamvadi]
         for i in sama:
             if i in self.swars:
                 self.sama.append(i)
-        amsa = ["sa","ma","pa"]
+        amsa = ["sa","ma","pa",self.vadi, self.psamvadi]
         for i in amsa:
             if i in self.swars:
                 self.amsa.append(i)
-        Emotive = ["kre","kdha","kni","kga"]
+        Emotive = ["kre","kdha","kni","kga","mat"]
         for i in Emotive:
             if i in self.swars:
                 self.emotive.append(i)

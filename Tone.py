@@ -7,14 +7,11 @@ import threading
 pygame.init()
 
 bits = 16
-sample_rate = 44100
-channels = 8  # Ensure we use stereo
+sample_rate = 44100 
+channels = 8 
 
-# Pre-initialize the mixer with the correct parameters
 pygame.mixer.pre_init(sample_rate, -bits, channels)
 pygame.mixer.init()
-
-# Check the mixer initialization
 print(f"Number of mixer channels (should be 2): {pygame.mixer.get_num_channels()}")
 print(f"Mixer frequency: {pygame.mixer.get_init()[0]}")
 print(f"Mixer format: {pygame.mixer.get_init()[1]}")
